@@ -11,7 +11,7 @@ def main():
     sampling_rate = 250e3
     bauds = 4160
 
-    data = np.fromfile('../noaa-12_256k.dat', dtype=np.complex64)
+    data = np.fromfile('noaa-12_256k.dat', dtype=np.complex64)
     # take the middle of the data (supposedly cleaner) 
     #data_portion = 1e-4
     #data = data[data.size * (1/2 - data_portion / 2) : data.size * (1/2 + data_portion / 2)]
