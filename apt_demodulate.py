@@ -44,7 +44,7 @@ def main():
     
     # decimate to get the real baud rate 
     dec = decimate(demod_lp, int(sampling_rate // bauds))
-    show_signal(dec, title="Decimated and FM+AM demodulated", dot=True)
+    show_signal(dec, title="Decimated and FM+AM demodulated", dot=True, logarithmic=True)
 
     # parse differents lines using the sync options
     # write image data to file
@@ -56,9 +56,12 @@ def lowpass(s, high, s_freq):
     b, a =  butter(5, high/s_freq, btype='lowpass')
     return lfilter(b, a, s)
 
-def show_signal(s, title=None, dot=False):
+def show_signal(s, title=None, dot=False, logarithmic=False):
     plt.subplot(2, 1, 1)
-    plt.plot(np.linspace(-s.size, s.size, s.size), np.abs(fftshift(fft(s))))
+    if logarithmic: 
+        plt.plot(np.linspace(-s.size, s.size, s.size), np.log(np.abs(fftshift(fft(s)))))
+    else: 
+        plt.plot(np.linspace(-s.size, s.size, s.size), np.abs(fftshift(fft(s))))
     a = plt.gca()
     a.set_xlim([-s.size / 2, s.size / 2])
 
