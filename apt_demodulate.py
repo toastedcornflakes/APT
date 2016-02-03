@@ -8,7 +8,7 @@ from scipy.signal import hilbert, decimate, lfilter, butter
 
 def main():
     fm_bandwidth = 34e3
-    sampling_rate = 250e3
+    sampling_rate = 256e3
     bauds = 4160
 
     data = np.fromfile('noaa-12_256k.dat', dtype=np.complex64)
