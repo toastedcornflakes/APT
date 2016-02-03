@@ -34,6 +34,9 @@ def main():
 
     # filter the AM signal to only keep component below 2.4khz
     demod_lp = lowpass(delta_theta, 2.4e3, sampling_rate)
+    # edge case: the signal has 255,999 samples, prime factors 3 and 85333.
+    # It's slow to hilbert transform so we add a padding
+    demod_lp = np.append(demod_lp, [0])
 
     # demodulate the AM with an hilbert filter
     h = hilbert(demod_lp) 
